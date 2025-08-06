@@ -9,19 +9,12 @@ interface MapViewData {
 }
 
 interface MapOfSvgProps {
-  /** The name of the map to render, e.g., "India", "Haryana", or "Uttar Pradesh" */
   name: string;
-  /** A fixed height for the SVG container */
   height?: string | number;
-  /** A fixed width for the SVG container */
   width?: string | number;
-  /** Click handler for when a path (state or district) is clicked */
   onPathClick?: (pathName: string, pathId: string) => void;
-  /** Initial zoom level (default: 1) */
   initialZoom?: number;
-  /** Enable zoom controls (default: true) */
   enableZoom?: boolean;
-  /** Enable pan functionality (default: true) */
   enablePan?: boolean;
 }
 
@@ -52,9 +45,12 @@ const formatStateNameForImport = (name: string) => {
  * Calculates bounding box for all paths
  */
 const calculateBoundingBox = (paths: SvgPath[]): ViewBox => {
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-  
-  paths.forEach(path => {
+  let minX = Infinity,
+    minY = Infinity,
+    maxX = -Infinity,
+    maxY = -Infinity;
+
+  paths.forEach((path) => {
     // Simple regex to extract coordinates from path data
     const coords = path.d.match(/-?\d+\.?\d*/g);
     if (coords) {
@@ -75,15 +71,15 @@ const calculateBoundingBox = (paths: SvgPath[]): ViewBox => {
   return {
     x: minX - padding,
     y: minY - padding,
-    width: (maxX - minX) + (padding * 2),
-    height: (maxY - minY) + (padding * 2)
+    width: maxX - minX + padding * 2,
+    height: maxY - minY + padding * 2,
   };
 };
 
-/**
- * Determines if a path should be clickable based on its className
- */
-const isPathClickable = (className?: string, onPathClick?: Function): boolean => {
+const isPathClickable = (
+  className?: string,
+  onPathClick?: Function
+): boolean => {
   if (!onPathClick) return false;
   if (!className) return true;
   return !className.includes("map-cover");
@@ -94,16 +90,15 @@ const isPathClickable = (className?: string, onPathClick?: Function): boolean =>
  */
 const getPathClasses = (path: SvgPath, mapName: string): string => {
   const baseClasses = [];
-  
-  const defaultClass = mapName.toLowerCase() === "india" 
-    ? "state-boundary" 
-    : "district-boundary";
+
+  const defaultClass =
+    mapName.toLowerCase() === "india" ? "state-boundary" : "district-boundary";
   baseClasses.push(defaultClass);
-  
+
   if (path.className) {
     baseClasses.push(path.className);
   }
-  
+
   return baseClasses.join(" ");
 };
 
@@ -119,16 +114,16 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
   const [mapView, setMapView] = useState<MapViewData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Zoom and pan state
   const [zoom, setZoom] = useState(initialZoom);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  
+
   // Original viewBox for calculations
   const [originalViewBox, setOriginalViewBox] = useState<ViewBox | null>(null);
-  
+
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -178,14 +173,14 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
   useEffect(() => {
     if (mapView) {
       let viewBox: ViewBox;
-      
+
       if (mapView.viewBox) {
-        const [x, y, w, h] = mapView.viewBox.split(' ').map(Number);
+        const [x, y, w, h] = mapView.viewBox.split(" ").map(Number);
         viewBox = { x, y, width: w, height: h };
       } else {
         viewBox = calculateBoundingBox(mapView.paths);
       }
-      
+
       setOriginalViewBox(viewBox);
       // Reset zoom and pan when new map loads
       setZoom(initialZoom);
@@ -196,13 +191,19 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
   // Calculate current viewBox based on zoom and pan
   const getCurrentViewBox = useCallback((): string => {
     if (!originalViewBox) return "0 0 1000 1000";
-    
+
     const zoomedWidth = originalViewBox.width / zoom;
     const zoomedHeight = originalViewBox.height / zoom;
-    
-    const x = originalViewBox.x + (originalViewBox.width - zoomedWidth) / 2 - pan.x / zoom;
-    const y = originalViewBox.y + (originalViewBox.height - zoomedHeight) / 2 - pan.y / zoom;
-    
+
+    const x =
+      originalViewBox.x +
+      (originalViewBox.width - zoomedWidth) / 2 -
+      pan.x / zoom;
+    const y =
+      originalViewBox.y +
+      (originalViewBox.height - zoomedHeight) / 2 -
+      pan.y / zoom;
+
     return `${x} ${y} ${zoomedWidth} ${zoomedHeight}`;
   }, [originalViewBox, zoom, pan]);
 
@@ -228,7 +229,7 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
   const handleWheel = (e: React.WheelEvent) => {
     if (!enableZoom) return;
     e.preventDefault();
-    
+
     const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
     const newZoom = Math.max(0.1, Math.min(10, zoom * zoomFactor));
     setZoom(newZoom);
@@ -354,7 +355,7 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
           {mapView.paths.map((path) => {
             const isClickable = isPathClickable(path.className, onPathClick);
             const pathClasses = getPathClasses(path, name);
-            
+
             return (
               <path
                 key={path.id}
@@ -368,8 +369,11 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
                     onPathClick(path.name, path.id);
                   }
                 }}
-                style={{ 
-                  cursor: isClickable ? "pointer" : "default"
+                style={{
+                  cursor: isClickable ? "pointer" : "default",
+                  fill: path.className?.includes("map-cover")
+                    ? "black"
+                    : undefined, // <-- color override
                 }}
               >
                 <title>{path.name}</title>

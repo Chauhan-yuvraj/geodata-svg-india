@@ -1,6 +1,7 @@
 // Updated App.tsx example
 
 import { useState } from "react";
+
 import { MapOfSvg } from "my-india-maps";
 import "my-india-maps/style.css";
 
