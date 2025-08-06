@@ -16,6 +16,12 @@ interface MapOfSvgProps {
   initialZoom?: number;
   enableZoom?: boolean;
   enablePan?: boolean;
+
+  strokeWidth?: number;
+  strokeColor?: string;
+  pathFillColor?: string;
+  coverFillColor?: string;
+  backgroundColor?: string;
 }
 
 interface ViewBox {
@@ -110,6 +116,11 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
   initialZoom = 1,
   enableZoom = true,
   enablePan = true,
+  strokeWidth = 1,
+  strokeColor = "#000",
+  pathFillColor,
+  coverFillColor = "black",
+  backgroundColor = "transparent",
 }) => {
   const [mapView, setMapView] = useState<MapViewData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -264,7 +275,7 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
   }
 
   return (
-    <div style={{ position: "relative", width, height }}>
+    <div style={{ position: "relative", width, height, backgroundColor }}>
       {/* Zoom Controls */}
       {enableZoom && (
         <div
@@ -371,9 +382,11 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
                 }}
                 style={{
                   cursor: isClickable ? "pointer" : "default",
+                  stroke: strokeColor,
+                  strokeWidth,
                   fill: path.className?.includes("map-cover")
-                    ? "black"
-                    : undefined, // <-- color override
+                    ? coverFillColor
+                    : pathFillColor,
                 }}
               >
                 <title>{path.name}</title>

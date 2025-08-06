@@ -34,12 +34,14 @@ function App() {
       </div>
 
       <h2>Displaying Map of: {currentMap}</h2>
-      
+
       <p style={{ fontSize: "14px", color: "#666", margin: "10px 0" }}>
-        • Use mouse wheel to zoom in/out<br/>
-        • Click and drag to pan around<br/>
-        • Use the zoom controls on the right<br/>
-        • Click on regions to interact
+        • Use mouse wheel to zoom in/out
+        <br />
+        • Click and drag to pan around
+        <br />
+        • Use the zoom controls on the right
+        <br />• Click on regions to interact
       </p>
 
       <div
@@ -50,16 +52,30 @@ function App() {
           border: "2px solid #ddd",
           borderRadius: "8px",
           overflow: "hidden",
-          boxShadow: "0 4px 8px rgba(0,0,0,0.1)"
+          boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
         }}
       >
-        <MapOfSvg 
-          name={currentMap} 
+        <MapOfSvg
+          name={currentMap}
           onPathClick={handlePathClick}
           initialZoom={1}
           enableZoom={true}
           enablePan={true}
+          backgroundColor="#f8f8f8"
+          coverFillColor="#f8f8f8"
         />
+
+        {/* <MapOfSvg
+          name="Haryana"
+          height={500}
+          width={500}
+          strokeWidth={1.5}
+          strokeColor="#444"
+          pathFillColor="#e0e0e0"
+          coverFillColor="#888"
+          backgroundColor="#f8f8f8"
+          onPathClick={(name, id) => console.log("Clicked", name, id)}
+        /> */}
       </div>
 
       <div style={{ marginTop: "20px", fontSize: "12px", color: "#888" }}>
