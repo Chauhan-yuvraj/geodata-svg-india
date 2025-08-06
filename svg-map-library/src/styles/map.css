@@ -1,0 +1,95 @@
+/* Base styles for all map paths */
+.state-boundary,
+.district-boundary {
+  fill: #e6f3ff;
+  stroke: #333;
+  stroke-width: 0.5;
+  transition: fill 0.2s ease, stroke-width 0.2s ease;
+}
+
+/* Hover effects for clickable paths */
+.state-boundary:hover:not(.map-cover),
+.district-boundary:hover:not(.map-cover) {
+  fill: #b3d9ff;
+  stroke: #000;
+  stroke-width: 1;
+}
+
+/* Specific styles for different classes */
+.scaled {
+  /* Additional styles for scaled paths if needed */
+}
+
+.translated {
+  /* Additional styles for translated paths if needed */
+}
+
+/* Map cover paths - no hover effects, different styling */
+.map-cover {
+  fill: transparent;
+  stroke: transparent;
+  pointer-events: none; /* Disable all mouse events */
+}
+
+/* Different colors for states vs districts if desired */
+.state-boundary {
+  fill: #e6f3ff;
+}
+
+.district-boundary {
+  fill: #f0f8ff;
+}
+
+/* Active/selected state */
+.state-boundary.active,
+.district-boundary.active {
+  fill: #4da6ff;
+  stroke: #000;
+  stroke-width: 1.5;
+}
+
+/* Zoom control buttons */
+.map-zoom-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.map-zoom-button {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 2px 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.map-zoom-button:hover {
+  background: #f0f0f0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.map-zoom-button:active {
+  transform: translateY(1px);
+}
+
+/* Zoom level indicator */
+.map-zoom-indicator {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.1);
+}

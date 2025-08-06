@@ -1,0 +1,33 @@
+// svg-map-library/tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* JSX */
+    "jsx": "react-jsx",
+
+    /* Key options for creating a library */
+    "declaration": true, // <-- Tells TypeScript to create .d.ts files
+    "declarationMap": true, // <-- Creates source maps for declarations, good for IDEs
+    "emitDeclarationOnly": true, // <-- IMPORTANT: Vite handles JS, so tsc only needs to create type files
+    "declarationDir": "./dist" // <-- Puts the .d.ts files in your dist folder
+  },
+  "include": ["src"], // <-- Tells TypeScript which folder to compile
+  "references": [{ "path": "./tsconfig.node.json" }] // <-- Usually created by Vite for config files
+}
