@@ -7,6 +7,7 @@ import "my-india-maps/style.css";
 
 function App() {
   const [currentMap, setCurrentMap] = useState("India");
+  const [HoveredRegion, setHoveredRegion] = useState<string | null>(null);
 
   const handlePathClick = (pathName: string, pathId: string) => {
     alert(`You clicked on ${pathName} (ID: ${pathId})`);
@@ -17,23 +18,56 @@ function App() {
     }
   };
 
+  const states = [
+    "AndhraPradesh",
+    "ArunachalPradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "HimachalPradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "MadhyaPradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "TamilNadu",
+    "Telangana",
+    "Tripura",
+    "UttarPradesh",
+    "Uttarakhand",
+    "WestBengal",
+   
+  ];
+
   return (
     <div style={{ textAlign: "center", fontFamily: "sans-serif" }}>
       <h1>Interactive Map Library</h1>
 
       <div style={{ margin: "20px 0" }}>
-        <button onClick={() => setCurrentMap("India")}>Show India</button>
-        <button onClick={() => setCurrentMap("Goa")}>Show India</button>
-        <button onClick={() => setCurrentMap("Kerala")}>Show Kerela</button>
-        <button onClick={() => setCurrentMap("India")}>Show India</button>
-        <button onClick={() => setCurrentMap("India")}>Show India</button>
-        <button onClick={() => setCurrentMap("Gujarat")}>Show Gujarat</button>
-        <button onClick={() => setCurrentMap("Uttar Pradesh")}>
-          Show Uttar Pradesh
-        </button>
+        {states.map((state) => (
+          <button
+            key={state}
+            onClick={() => setCurrentMap(state)}
+            className="m-2 p-2 border rounded"
+          >
+            Show {state}
+          </button>
+        ))}
       </div>
 
       <h2>Displaying Map of: {currentMap}</h2>
+      <h2>Displaying District of: {HoveredRegion}</h2>
 
       <p style={{ fontSize: "14px", color: "#666", margin: "10px 0" }}>
         • Use mouse wheel to zoom in/out
@@ -58,24 +92,13 @@ function App() {
         <MapOfSvg
           name={currentMap}
           onPathClick={handlePathClick}
+         onPathHover={(pathName) => setHoveredRegion(pathName)}
           initialZoom={1}
           enableZoom={true}
           enablePan={true}
           backgroundColor="#f8f8f8"
           coverFillColor="#f8f8f8"
         />
-
-        {/* <MapOfSvg
-          name="Haryana"
-          height={500}
-          width={500}
-          strokeWidth={1.5}
-          strokeColor="#444"
-          pathFillColor="#e0e0e0"
-          coverFillColor="#888"
-          backgroundColor="#f8f8f8"
-          onPathClick={(name, id) => console.log("Clicked", name, id)}
-        /> */}
       </div>
 
       <div style={{ marginTop: "20px", fontSize: "12px", color: "#888" }}>
