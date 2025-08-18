@@ -1,6 +1,6 @@
-export const himachal_pradeshData = {
-  id: "himachal_pradesh",
-  name: "Himachal_pradesh",
+export const himachalPradeshData = {
+  id: "HimachalPradesh",
+  name: "HimachalPradesh",
   paths: [
   {
     "id": "mandi",

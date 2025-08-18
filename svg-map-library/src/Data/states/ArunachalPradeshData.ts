@@ -1,6 +1,6 @@
-export const Arunachal_PradeshData = {
-  id: "Arunachal_Pradesh",
-  name: "Arunachal_pradesh",
+export const ArunachalPradeshData = {
+  id: "ArunachalPradesh",
+  name: "ArunachalPradesh",
   paths: [
     {
       id: "west_kameng",

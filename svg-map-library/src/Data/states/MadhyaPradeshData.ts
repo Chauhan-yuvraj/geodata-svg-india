@@ -1,6 +1,6 @@
-export const Madhya_PradeshData = {
-  id: "Madhya_Pradesh",
-  name: "Madhya_pradesh",
+export const MadhyaPradeshData = {
+  id: "MadhyaPradesh",
+  name: "MadhyaPradesh",
   paths: [
     {
       id: "neemuch",

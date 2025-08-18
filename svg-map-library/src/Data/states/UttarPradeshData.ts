@@ -1,6 +1,6 @@
-export const Uttar_PradeshData = {
-  id: "Uttar_Pradesh",
-  name: "Uttar_pradesh",
+export const UttarPradeshData = {
+  id: "UttarPradesh",
+  name: "UttarPradesh",
   paths: [
     {
       id: "chandrauli",

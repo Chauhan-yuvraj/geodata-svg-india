@@ -1,6 +1,6 @@
-export const Tamil_NaduData = {
-  id: "Tamil_Nadu",
-  name: "Tamil_nadu",
+export const TamilNaduData = {
+  id: "TamilNadu",
+  name: "TamilNadu",
   paths: [
     {
       id: "perambalur",

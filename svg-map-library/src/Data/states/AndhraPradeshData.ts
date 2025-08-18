@@ -1,6 +1,6 @@
-export const Andhra_PradeshData = {
-  id: "Andhra_Pradesh",
-  name: "Andhra_pradesh",
+export const AndhraPradeshData = {
+  id: "AndhraPradesh",
+  name: "AndhraPradesh",
   paths: [
   {
     "id": "srikakulam",

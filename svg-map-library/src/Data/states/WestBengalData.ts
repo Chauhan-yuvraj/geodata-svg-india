@@ -1,6 +1,6 @@
 export const WestBengalData = {
   id: "WestBengal",
-  name: "Westbengal",
+  name: "WestBengal",
   paths: [
   {
     "id": "darjeeling",
