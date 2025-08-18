@@ -1,4 +1,4 @@
-export const himachalPradeshData = {
+export const HimachalPradeshData = {
   id: "HimachalPradesh",
   name: "HimachalPradesh",
   paths: [

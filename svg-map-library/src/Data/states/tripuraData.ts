@@ -1,5 +1,5 @@
-export const tripuraData = {
-  id: "tripura",
+export const TripuraData = {
+  id: "Tripura",
   name: "Tripura",
   paths: [
   {

@@ -13,6 +13,7 @@ interface MapOfSvgProps {
   height?: string | number;
   width?: string | number;
   onPathClick?: (pathName: string, pathId: string) => void;
+  onPathHover?: (pathName: string | null, pathId: string) => void;
   initialZoom?: number;
   enableZoom?: boolean;
   enablePan?: boolean;
@@ -113,6 +114,7 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
   width = "100%",
   height = "100%",
   onPathClick,
+  onPathHover,
   initialZoom = 1,
   enableZoom = true,
   enablePan = true,
@@ -380,6 +382,8 @@ export const MapOfSvg: React.FC<MapOfSvgProps> = ({
                     onPathClick(path.name, path.id);
                   }
                 }}
+                onMouseEnter={() => onPathHover?.(path.name, path.id)}
+                onMouseLeave={() => onPathHover?.(null, path.id)}
                 style={{
                   cursor: isClickable ? "pointer" : "default",
                   stroke: strokeColor,

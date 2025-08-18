@@ -1,7 +1,7 @@
 {
   "name": "my-india-maps",
   "private": false,
-  "version": "0.2.0",
+  "version": "0.3.2",
   "type": "module",
   "main": "./dist/my-india-maps.umd.cjs",
   "module": "./dist/my-india-maps.js",

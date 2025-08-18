@@ -1,5 +1,5 @@
-export const haryanaData = {
-  id: "haryana",
+export const HaryanaData = {
+  id: "Haryana",
   name: "Haryana",
   paths: [
   {
