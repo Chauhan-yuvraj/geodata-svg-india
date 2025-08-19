@@ -1,10 +1,9 @@
 // src/index.ts
-
-// Import the stylesheet so that it gets included in the build
 import './styles/map.css';
 
-// Export the main component that users will interact with
+// Export both the original and safe versions
 export { MapOfSvg } from './components/MapOfSvg';
+export { SafeMapOfSvg } from './components/SafeMapOfSvg';
 
-// Optionally, export the types for users who want to use them
+// Export types
 export type { SvgPath, StateModule, IndiaModule } from './types';

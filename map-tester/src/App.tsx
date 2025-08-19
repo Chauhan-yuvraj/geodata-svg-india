@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { MapOfSvg } from "my-india-maps";
+import {  SafeMapOfSvg } from "my-india-maps";
 import "my-india-maps/style.css";
 
 function App() {
@@ -89,7 +89,7 @@ function App() {
           boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
         }}
       >
-        <MapOfSvg
+        <SafeMapOfSvg
           name={currentMap}
           onPathClick={handlePathClick}
          onPathHover={(pathName) => setHoveredRegion(pathName)}

@@ -1,0 +1,11 @@
+# .npmignore
+
+# Dev stuff
+.vscode/
+src/
+vite.config.ts
+tsconfig.json
+.eslintrc.cjs
+
+# Dependencies
+node_modules/

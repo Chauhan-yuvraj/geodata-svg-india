@@ -1,7 +1,7 @@
 {
   "name": "my-india-maps",
   "private": false,
-  "version": "0.3.2",
+  "version": "0.3.6",
   "type": "module",
   "main": "./dist/my-india-maps.umd.cjs",
   "module": "./dist/my-india-maps.js",
@@ -24,18 +24,17 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
-    "react": "^18.2.0 || ^19.0.0",
-    "react-dom": "^18.2.0 || ^19.0.0"
+    "react": ">=18.2.0 <20.0.0",
+    "react-dom": ">=18.2.0 <20.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.19.9",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "npm-run-all": "^4.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.13",
     "vite-plugin-dts": "^3.9.1"
