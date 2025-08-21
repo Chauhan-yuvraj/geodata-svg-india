@@ -1,111 +1,23 @@
-// Updated App.tsx example
-
-import { useState } from "react";
-
+import { useState, type SetStateAction } from "react";
 import { MapOfSvg } from "my-india-maps";
-import "my-india-maps/style.css";
-
-function App() {
-  const [currentMap, setCurrentMap] = useState("India");
-  const [HoveredRegion, setHoveredRegion] = useState<string | null>(null);
-
-  const handlePathClick = (pathName: string, pathId: string) => {
-    alert(`You clicked on ${pathName} (ID: ${pathId})`);
-
-    // Navigate to the state map when a state is clicked on the India map
-    if (currentMap.toLowerCase() === "india") {
-      setCurrentMap(pathName);
-    }
-  };
-
-  const states = [
-    "AndhraPradesh",
-    "ArunachalPradesh",
-    "Assam",
-    "Bihar",
-    "Chhattisgarh",
-    "Goa",
-    "Gujarat",
-    "Haryana",
-    "HimachalPradesh",
-    "Jharkhand",
-    "Karnataka",
-    "Kerala",
-    "MadhyaPradesh",
-    "Maharashtra",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Odisha",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "TamilNadu",
-    "Telangana",
-    "Tripura",
-    "UttarPradesh",
-    "Uttarakhand",
-    "WestBengal",
-   
-  ];
+import "./index.css";
+export default function App() {
+  const [map, setMap] = useState("Bihar");
 
   return (
-    <div style={{ textAlign: "center", fontFamily: "sans-serif" }}>
-      <h1>Interactive Map Library</h1>
-
-      <div style={{ margin: "20px 0" }}>
-        {states.map((state) => (
-          <button
-            key={state}
-            onClick={() => setCurrentMap(state)}
-            className="m-2 p-2 border rounded"
-          >
-            Show {state}
-          </button>
-        ))}
-      </div>
-
-      <h2>Displaying Map of: {currentMap}</h2>
-      <h2>Displaying District of: {HoveredRegion}</h2>
-
-      <p style={{ fontSize: "14px", color: "#666", margin: "10px 0" }}>
-        • Use mouse wheel to zoom in/out
-        <br />
-        • Click and drag to pan around
-        <br />
-        • Use the zoom controls on the right
-        <br />• Click on regions to interact
-      </p>
-
-      <div
-        style={{
-          margin: "0 auto",
-          width: "90vw",
-          height: "80vh",
-          border: "2px solid #ddd",
-          borderRadius: "8px",
-          overflow: "hidden",
-          boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-        }}
-      >
-        <MapOfSvg
-          name={currentMap}
-          onPathClick={handlePathClick}
-         onPathHover={(pathName) => setHoveredRegion(pathName)}
-          initialZoom={1}
-          enableZoom={true}
-          enablePan={true}
-          backgroundColor="#f8f8f8"
-          coverFillColor="#f8f8f8"
-        />
-      </div>
-
-      <div style={{ marginTop: "20px", fontSize: "12px", color: "#888" }}>
-        <p>Map data includes proper scaling and translation transformations</p>
-      </div>
+    <div className="main-div">
+      <h1>India Map</h1>
+      <MapOfSvg
+        name={map}
+        strokeColor="#2c3e50"
+        pathFillColor="white"
+        hoverPathColor="pink" // <-- works now 
+        viewportConfig={{ x: 0, y: 0, width: 2500, height: 2500 }}
+        onPathHover={(name, id) => console.log(name, id)}
+        autoFit={true} // ✅ will auto-scale to fit container
+        fillById={{ MH: "orange", KA: "green" }}
+        onPathClick={(name: SetStateAction<string>) => setMap(name)}
+      />
     </div>
   );
 }
-
-export default App;
